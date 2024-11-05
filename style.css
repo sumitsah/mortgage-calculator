@@ -1,0 +1,485 @@
+@font-face {
+    font-family: 'plus_jakarta_sansregular';
+    src: url('assets/fonts/plusjakartasans-variablefont_wght-webfont.woff2') format('woff2'),
+        url('assets/fonts/plusjakartasans-variablefont_wght-webfont.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'plus_jakarta_sansitalic';
+    src: url('assets/fonts/plusjakartasans-italic-variablefont_wght-webfont.woff2') format('woff2'),
+        url('assets/fonts/plusjakartasans-italic-variablefont_wght-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --clr-primary-lime: hsl(61, 70%, 52%);
+    --clr-primary-red: hsl(4, 69%, 50%);
+
+
+    --clr-neutral-white: hsl(0, 0%, 100%);
+    --clr-neutral-slate-100: hsl(202, 86%, 94%);
+    --clr-neutral-slate-300: hsl(203, 41%, 72%);
+    --clr-neutral-slate-500: hsl(200, 26%, 54%);
+    --clr-neutral-slate-700: hsl(200, 24%, 40%);
+    --clr-neutral-slate-900: hsl(202, 55%, 16%);
+    --clr-neutral-slate-1000: hsl(200, 51%, 13%);
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Prevent font size inflation */
+html {
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
+/* Remove default margin in favour of better control in authored CSS */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+    list-style: none;
+}
+
+/* html,
+body {
+    height: 100%;
+} */
+
+/* Set core body defaults */
+body {
+    font-family: "plus_jakarta_sansregular", sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    min-height: 100svh;
+    line-height: 1.5;
+    color: var(--clr-neutral-slate-900);
+    background-color: var(--clr-neutral-slate-100);
+    margin: 0;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+    line-height: 1.2;
+}
+
+/* Balance text wrapping on headings */
+h1,
+h2,
+h3,
+h4 {
+    text-wrap: balance;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+    color: currentColor;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+    max-width: 100%;
+    display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+    min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+    scroll-margin-block: 5ex;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding-left: 1rem;
+    font-size: 1.25rem;
+    letter-spacing: 0.1rem;
+    font-weight: 700;
+}
+
+input[type="radio"] {
+    appearance: none;
+    /* background-color: #fff; */
+    margin: 0;
+    cursor: pointer;
+
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 50%;
+    transform: translateY(-0.075em);
+    transform: translateX(0.75em);
+
+    display: grid;
+    place-content: center;
+}
+
+input[type="radio"]+label {
+    margin-left: 20px;
+}
+
+input[type="radio"]:checked {
+    border: 0.15em solid var(--clr-primary-lime);
+}
+
+
+input[type="radio"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--clr-primary-lime);
+    margin-left: -0.80em;
+    margin-top: -0.02em;
+}
+
+input[type="radio"]:checked::before {
+    transform: scale(1);
+}
+
+.calculator {
+    background-color: var(--clr-neutral-white);
+    padding-bottom: 1rem;
+}
+
+.calculator-heading {
+    padding: 0 1.2rem;
+    margin-top: 1rem;
+}
+
+.calculator-form {
+    display: grid;
+    gap: 1.5rem;
+    padding: 1.2rem;
+}
+
+.clear-all {
+    background-color: transparent;
+    border: none;
+    text-decoration-line: underline;
+    line-height: 2;
+    text-align: start;
+    padding: 0;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.amount-container,
+.years-container,
+.type-container,
+.interest-container {
+    border: 1px solid var(--clr-neutral-slate-900);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.type-container {
+    font-weight: 700;
+    padding: 0.75rem 0;
+    font-size: 1.1rem;
+}
+
+.amount-container:hover,
+.years-container:hover,
+.type-container:hover,
+.interest-container:hover {
+    border: 1px solid var(--clr-primary-lime);
+    cursor: pointer;
+}
+
+.type-container label {
+    width: 100%;
+}
+
+.type-container label:hover {
+    cursor: pointer;
+}
+
+.spacer {
+    background-color: var(--clr-neutral-slate-100);
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.red .spacer {
+    background-color: var(--clr-primary-red);
+    color: var(--clr-neutral-white);
+}
+
+.amount-container:hover .spacer,
+.years-container:hover .spacer,
+.interest-container:hover .spacer {
+    background-color: var(--clr-primary-lime);
+}
+
+.red.amount-container:hover .spacer,
+.red.years-container:hover .spacer,
+.red.interest-container:hover .spacer {
+    background-color: var(--clr-primary-red);
+}
+
+
+
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.form-type {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.submit-btn {
+    background-color: var(--clr-primary-lime);
+    font-weight: 600;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 28px;
+    padding: 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: hsla(61, 70%, 52%, 0.5);
+}
+
+.result-container {
+    background-color: var(--clr-neutral-slate-900);
+    padding: 2rem 1rem;
+}
+
+.result {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--clr-neutral-white);
+    max-width: 300px;
+    margin-inline: auto;
+    text-align: center;
+    padding: 1.5rem 0;
+}
+
+.display-switch {
+    display: none;
+}
+
+.actual-result {
+    color: var(--clr-neutral-slate-300);
+}
+
+.actual-result-heading {
+    color: var(--clr-neutral-white);
+}
+
+.result-message {
+    color: var(--clr-neutral-slate-300);
+    margin: 1rem 0;
+}
+
+.calculated-payments {
+    font-size: 3rem;
+    color: var(--clr-primary-lime);
+    font-weight: 700;
+}
+
+.result-card {
+    background-color: var(--clr-neutral-slate-1000);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: -1px -4px 0px -1px var(--clr-primary-lime);
+    margin-top: 2rem;
+}
+
+.line-break {
+    height: 1px;
+    width: 100%;
+    background-color: var(--clr-neutral-slate-700);
+    margin-bottom: 1rem;
+}
+
+.container {
+    display: grid;
+    overflow: hidden;
+    margin-inline: auto;
+    max-width: 850px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.192);
+}
+
+.repay-term,
+.repay-interest {
+    color: var(--clr-neutral-white);
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.lime {
+    background-color: hsla(61, 74%, 59%, 0.178);
+    border: 1px solid var(--clr-primary-lime);
+}
+
+.error {
+    display: none;
+}
+
+.red~.error {
+    display: block;
+    color: var(--clr-primary-red);
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+/* input[type="radio"]:not(:checked) .red {
+    border: 1px solid var(--clr-primary-red);
+} */
+
+/* input:not(:checked, [type="radio"]) .red {
+    border: 1px solid var(--clr-primary-red);
+} */
+
+.red.amount-container:hover,
+.red.amount-container,
+.red.years-container:hover,
+.red.years-container,
+.red.interest-container:hover,
+.red.interest-container {
+    border: 1px solid var(--clr-primary-red);
+}
+
+/* Error state handle */
+input:invalid .amount-container {
+    border: 1px solid var(--clr-primary-red);
+}
+
+@media (min-width: 700px) {
+
+    body {
+        place-content: center;
+    }
+
+    .calculator {
+        padding: 1rem;
+    }
+
+    .calculator-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 1rem;
+    }
+
+    .clear-all {
+        margin-bottom: 0;
+    }
+
+    .container {
+        /* display: grid; */
+        grid-template-columns: 1fr 1fr;
+        border-radius: 1.2rem;
+        background-color: var(--clr-neutral-white);
+    }
+
+    .result-container {
+        border-bottom-left-radius: 3rem;
+        padding: 1.25rem;
+    }
+
+    .grid-center {
+        display: grid;
+        place-content: center;
+    }
+
+    .result {
+        max-width: 400px;
+    }
+
+    .form-type {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .submit-btn {
+        width: 80%;
+    }
+
+    .result-message {
+        margin-top: 1rem;
+    }
+
+}

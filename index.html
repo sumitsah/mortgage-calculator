@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Mortgage repayment calculator</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <main>
+    <div class="container">
+      <section class="calculator">
+        <div class="calculator-heading">
+          <h1> Mortgage Calculator</h1>
+
+          <button class="clear-all" id="reset-form">
+            Clear All
+          </button>
+
+        </div>
+        <form class="calculator-form">
+          <div>
+            <label for="">Mortgage Amount</label>
+            <div class="amount-container d-flex">
+              <span class="spacer">₹</span>
+              <input type="number" name="mortgageAmount" inputmode="numeric" autocomplete="off" aria-required="true">
+            </div>
+            <p class="error">This field is required</p>
+          </div>
+
+          <div class="form-type">
+            <div>
+              <label for="">Mortgage Term</label>
+              <div class="years-container d-flex">
+                <input type="number" name="mortgageTerm" inputmode="numeric" autocomplete="off" aria-required="true">
+                <span class="spacer">years</span>
+              </div>
+              <p class="error">This field is required</p>
+            </div>
+
+            <div>
+              <label for="">Interest Rate</label>
+              <div class="interest-container d-flex">
+                <input type="text" inputmode="decimal" name="interestRate" autocomplete="off"
+                  pattern="[0-9]*[.,]?[0-9]*" min="1" max="15" aria-required="true" id="interest-rate">
+                <span class="spacer">%</span>
+              </div>
+              <p class="error">This field is required</p>
+            </div>
+          </div>
+
+
+          <div role="group" aria-labelledby="mortgage-type">
+            <label for="mortgage-type"> Mortgage Type</label>
+            <div class="type-container d-flex">
+              <input id="repay" type="radio" name="mortgageType" aria-required="true">
+              <label for="repay">Repayment</label>
+            </div>
+            <div class="type-container d-flex">
+              <input id="interest" type="radio" name="mortgageType" aria-required="true">
+              <label for="interest">Interest Only</label>
+            </div>
+            <p class="error">This field is required</p>
+          </div>
+
+          <button type="submit" class="submit-btn" value="Submit">
+            <img src="assets/images/icon-calculator.svg" alt="calculator-icon on calculate repayments button">
+            Calculate Repayments
+          </button>
+        </form>
+
+      </section>
+
+      <!-- apply grid-center in container -->
+      <section class="result-container" role="region" id="paymentsInfo" aria-live="polite">
+        <div class="result">
+          <img class="result-empty-img" src="assets/images/illustration-empty.svg" alt="calculation images">
+          <h2> Results shown here</h2>
+          <p class="result-message"> Complete the form and click “calculate repayments” to see what
+            your monthly repayments would be.</p>
+        </div>
+
+        <div class="actual-result display-switch">
+          <h2 class="actual-result-heading">Your Results</h2>
+          <p class="result-message"> Your results are shown below based on the information you provided.
+            To adjust the results, edit the form and click “calculate repayments” again.</p>
+          <div class="result-card">
+
+            <div>
+              <p> Your monthly repayments</p>
+              <span class="calculated-payments"></span>
+              <div class="line-break"></div>
+              <p>Total you'll repay over the term</p>
+              <span class="repay-term"></span>
+            </div>
+
+            <div class="display-switch">
+              <p>Total interest you'll repay over the term</p>
+              <span class="repay-interest"></span>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+
+</html>
