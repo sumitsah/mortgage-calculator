@@ -17,13 +17,10 @@ numericInputs.forEach((input) => {
 
 function validateInput(el) {
     el.addEventListener("beforeinput", function (e) {
-        console.log(el.value)
         let beforeValue = el.value;
         e.target.addEventListener("input", function () {
-            console.log(el.validity.patternMismatch)
             if (el.validity.patternMismatch) {
                 el.value = beforeValue;
-                console.log(el.value)
             }
         },
             { once: true }
@@ -35,15 +32,19 @@ inputs.forEach((input) => {
     input.addEventListener('change', () => {
         if (!input.checkValidity()) {
             input.parentElement.classList.add('red');
+            input.parentElement.parentElement.nextElementSibling.classList.add('show-error');
         } else {
             input.parentElement.classList.remove('red');
+            input.parentElement.parentElement.nextElementSibling.classList.remove('show-error');
         }
     })
     input.addEventListener('input', () => {
         if (!input.checkValidity()) {
             input.parentElement.classList.add('red');
+            input.parentElement.parentElement.nextElementSibling.classList.add('show-error');
         } else {
             input.parentElement.classList.remove('red');
+            input.parentElement.parentElement.nextElementSibling.classList.remove('show-error');
         }
     })
 })
@@ -54,25 +55,37 @@ let repayment = false;
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     formData = new FormData(form);
-    let invalidData = false;
+    let invalidData = -1, i = 0, invalidForm = false;
 
     inputs.forEach((input) => {
         if (input.value === '') {
             input.parentElement.classList.add('red');
-            invalidData = true;
+            input.parentElement.parentElement.nextElementSibling.classList.add('show-error');
+            if (invalidData === -1) {
+                invalidData = i;
+            }
+            invalidForm = true;
         } else {
-            console.log(input.checkValidity());
             input.parentElement.classList.remove('red');
+            input.parentElement.parentElement.nextElementSibling.classList.remove('show-error');
         }
+        i++;
     })
+
+    // Focus on the first inavlid field in the form
+    if (invalidData !== -1) {
+        inputs[invalidData].focus();
+    }
 
     if (!repay.checked && !interest.checked) {
         interest.parentElement.classList.add('red')
         repay.parentElement.classList.add('red')
+        interest.parentElement.nextElementSibling.classList.add('show-error');
+        repay.parentElement.nextElementSibling.nextElementSibling.classList.add('show-error');
         return;
     }
 
-    if (invalidData) {
+    if (invalidForm) {
         return;
     }
 
@@ -108,17 +121,23 @@ function numberWithCommas(x) {
 }
 
 clearBtn.addEventListener('click', () => {
-    form.reset();
     interest.parentElement.classList.remove('lime');
     repay.parentElement.classList.remove('lime');
+
     actualResult.classList.add('display-switch');
     result.classList.remove('display-switch');
-    interest.parentElement.classList.remove('red')
-    repay.parentElement.classList.remove('red')
+
+    interest.parentElement.classList.remove('red');
+    repay.parentElement.classList.remove('red');
+
+    repay.parentElement.nextElementSibling.nextElementSibling.classList.remove('show-error');
+    interest.parentElement.nextElementSibling.classList.remove('show-error');
 
     inputs.forEach((input) => {
         input.parentElement.classList.remove('red');
+        input.parentElement.parentElement.nextElementSibling.classList.remove('show-error');
     })
+    form.reset();
 })
 
 function monthlyPayment(p, n, i) {
@@ -132,6 +151,7 @@ repay.addEventListener('click', (e) => {
         repay.classList.add('lime');
         e.target.parentElement.classList.add('lime')
         interest.parentElement.classList.remove('red')
+        repay.parentElement.nextElementSibling.nextElementSibling.classList.remove('show-error');
     } else {
         repayment = false;
         e.target.parentElement.classList.remove('lime')
@@ -147,6 +167,7 @@ interest.addEventListener('click', (e) => {
         repayment = false;
         e.target.parentElement.classList.add('lime');
         repay.parentElement.classList.remove('red');
+        interest.parentElement.nextElementSibling.classList.remove('show-error');
     } else {
         repayment = true;
         e.target.parentElement.classList.remove('lime')

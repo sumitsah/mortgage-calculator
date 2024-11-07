@@ -159,6 +159,7 @@ input[type="radio"] {
     /* background-color: #fff; */
     margin: 0;
     cursor: pointer;
+    outline: auto;
 
     font: inherit;
     color: currentColor;
@@ -173,6 +174,17 @@ input[type="radio"] {
     place-content: center;
 }
 
+.radio-fieldset {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+/* input[type="radio"]:focus-visible {
+    outline: 1px solid crimson;
+    border-radius: 3px;
+} */
+
 input[type="radio"]+label {
     margin-left: 20px;
 }
@@ -180,7 +192,6 @@ input[type="radio"]+label {
 input[type="radio"]:checked {
     border: 0.15em solid var(--clr-primary-lime);
 }
-
 
 input[type="radio"]::before {
     content: "";
@@ -204,8 +215,8 @@ input[type="radio"]:checked::before {
 }
 
 .calculator-heading {
-    padding: 0 1.2rem;
-    margin-top: 1rem;
+    /* padding: 0 1.2rem;
+    margin-top: 1rem; */
 }
 
 .calculator-form {
@@ -354,6 +365,12 @@ input[type="radio"]:checked::before {
     font-size: 3rem;
     color: var(--clr-primary-lime);
     font-weight: 700;
+    border-bottom: 1px solid var(--clr-neutral-slate-700);
+    margin-bottom: 1rem;
+}
+
+dd {
+    margin: 0;
 }
 
 .result-card {
@@ -364,12 +381,12 @@ input[type="radio"]:checked::before {
     margin-top: 2rem;
 }
 
-.line-break {
+/* .line-break {
     height: 1px;
     width: 100%;
     background-color: var(--clr-neutral-slate-700);
     margin-bottom: 1rem;
-}
+} */
 
 .container {
     display: grid;
@@ -395,7 +412,7 @@ input[type="radio"]:checked::before {
     display: none;
 }
 
-.red~.error {
+.show-error {
     display: block;
     color: var(--clr-primary-red);
     font-size: 0.75rem;
@@ -403,6 +420,15 @@ input[type="radio"]:checked::before {
     font-weight: 700;
     letter-spacing: 0.05em;
 }
+
+/* .red~.error {
+    display: block;
+    color: var(--clr-primary-red);
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+} */
 
 /* input[type="radio"]:not(:checked) .red {
     border: 1px solid var(--clr-primary-red);
@@ -440,7 +466,7 @@ input:invalid .amount-container {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-top: 1rem;
+        /* margin-top: 1rem; */
     }
 
     .clear-all {

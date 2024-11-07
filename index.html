@@ -18,58 +18,74 @@
   <main>
     <div class="container">
       <section class="calculator">
-        <div class="calculator-heading">
-          <h1> Mortgage Calculator</h1>
 
-          <button class="clear-all" id="reset-form">
-            Clear All
-          </button>
-
-        </div>
-        <form class="calculator-form">
+        <form class="calculator-form" novalidate>
+          <div class="calculator-heading">
+            <h1> Mortgage Calculator</h1>
+            <button class="clear-all" id="reset-form" type="reset">
+              Clear All
+            </button>
+          </div>
           <div>
-            <label>Mortgage Amount</label>
-            <div class="amount-container d-flex">
-              <span class="spacer">₹</span>
-              <input type="number" name="mortgageAmount" inputmode="numeric" autocomplete="off" aria-required="true">
+            <label for="mortgage-amount">Mortgage Amount
+              <div class="amount-container d-flex">
+                <span class="spacer" aria-hidden="true">₹</span>
+                <input type="number" name="mortgageAmount" id="mortgage-amount" inputmode="numeric" autocomplete="off"
+                  aria-describedby="mortgage-amount-error">
+              </div>
+            </label>
+            <div id="mortgage-amount-error" class="error" aria-live="assertive">
+              <p>This field is required</p>
             </div>
-            <p class="error">This field is required</p>
           </div>
 
           <div class="form-type">
             <div>
-              <label>Mortgage Term</label>
-              <div class="years-container d-flex">
-                <input type="number" name="mortgageTerm" inputmode="numeric" autocomplete="off" aria-required="true">
-                <span class="spacer">years</span>
+              <label for="mortgage-term">Mortgage Term
+                <div class="years-container d-flex">
+                  <input type="number" name="mortgageTerm" id="mortgage-term" inputmode="numeric" autocomplete="off"
+                    aria-describedby="mortgage-term-error">
+                  <span class="spacer" aria-hidden="true">years</span>
+                </div>
+              </label>
+              <div id="mortgage-term-error" class="error" aria-live="assertive">
+                <p>This field is required</p>
               </div>
-              <p class="error">This field is required</p>
             </div>
 
             <div>
-              <label>Interest Rate</label>
-              <div class="interest-container d-flex">
-                <input type="text" inputmode="decimal" name="interestRate" autocomplete="off"
-                  pattern="[0-9]*[.,]?[0-9]*" min="1" max="15" aria-required="true" id="interest-rate">
-                <span class="spacer">%</span>
+              <label for="interest-rate">Interest Rate
+                <div class="interest-container d-flex">
+                  <input type="text" inputmode="decimal" name="interestRate" autocomplete="off"
+                    pattern="[0-9]*[.,]?[0-9]*" min="1" max="15" aria-required="true" id="interest-rate"
+                    aria-describedby="interest-rate-error">
+                  <span class="spacer" aria-hidden="true">%</span>
+                </div>
+              </label>
+              <div id="interest-rate-error" class="error" aria-live="assertive">
+                <p>This field is required</p>
               </div>
-              <p class="error">This field is required</p>
             </div>
           </div>
 
 
-          <div role="group" id="mortgage-type" aria-labelledby="mortgage-type">
-            <label for="mortgage-type"> Mortgage Type</label>
+
+          <fieldset class="radio-fieldset">
+            <legend>Mortgage Type </legend>
             <div class="type-container d-flex">
-              <input id="repay" type="radio" name="mortgageType" aria-required="true">
-              <label for="repay">Repayment</label>
+              <input id="repay" type="radio" name="mortgageType" aria-describedby="mortgage-type-error">
+              <label for="repay"> Repayment</label>
             </div>
             <div class="type-container d-flex">
-              <input id="interest" type="radio" name="mortgageType" aria-required="true">
+              <input id="interest" type="radio" name="mortgageType" aria-describedby="mortgage-type-error">
               <label for="interest">Interest Only</label>
             </div>
-            <p class="error">This field is required</p>
-          </div>
+            <div id="mortgage-type-error" class="error" aria-live="assertive">
+              <p>This field is required</p>
+            </div>
+          </fieldset>
+
+
 
           <button type="submit" class="submit-btn" value="Submit">
             <img src="assets/images/icon-calculator.svg" alt="calculator-icon on calculate repayments button">
@@ -92,22 +108,22 @@
           <h2 class="actual-result-heading">Your Results</h2>
           <p class="result-message"> Your results are shown below based on the information you provided.
             To adjust the results, edit the form and click “calculate repayments” again.</p>
+
           <div class="result-card">
+            <dl>
+              <dt> Your monthly repayments</dt>
+              <dd class="calculated-payments"></dd>
 
-            <div>
-              <p> Your monthly repayments</p>
-              <span class="calculated-payments"></span>
-              <div class="line-break"></div>
-              <p>Total you'll repay over the term</p>
-              <span class="repay-term"></span>
-            </div>
+              <dt>Total you'll repay over the term</dt>
+              <dd class="repay-term"></dd>
+            </dl>
 
-            <div class="display-switch">
-              <p>Total interest you'll repay over the term</p>
-              <span class="repay-interest"></span>
-            </div>
-
+            <dl class="display-switch">
+              <dt>Total interest you'll repay over the term</dt>
+              <dd class="repay-interest"></dd>
+            </dl>
           </div>
+
         </div>
       </section>
     </div>
